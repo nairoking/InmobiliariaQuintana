@@ -123,3 +123,8 @@ C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\Inm
 C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Inquilinos\Index.cshtml.g.cs
 C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Inquilinos\Create.cshtml.g.cs
 C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Inquilinos\Edit.cshtml.g.cs
+C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Inquilinos\Delete.cshtml.g.cs
+C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Propietarios\Index.cshtml.g.cs
+C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Propietarios\Create.cshtml.g.cs
+C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Propietarios\Edit.cshtml.g.cs
+C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Propietarios\Delete.cshtml.g.cs

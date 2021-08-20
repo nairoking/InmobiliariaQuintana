@@ -56,11 +56,8 @@ namespace InmobiliariaQuintana.Controllers
         public ActionResult Edit(int id)
         {
             var inqui = repositorio.ObtenerPorId(id);
-            //ViewBag.Propietarios = repoPropietario.ObtenerTodos();
-            if (TempData.ContainsKey("Mensaje"))
-                ViewBag.Mensaje = TempData["Mensaje"];
-            if (TempData.ContainsKey("Error"))
-                ViewBag.Error = TempData["Error"];
+           
+            
             return View(inqui);
             
         }
@@ -88,16 +85,19 @@ namespace InmobiliariaQuintana.Controllers
         // GET: InquilinosController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var entidad = repositorio.ObtenerPorId(id);
+            return View(entidad);
         }
 
         // POST: InquilinosController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Inquilinos inqui)
         {
             try
             {
+                repositorio.Baja(id);
+                TempData["Mensaje"] = "Eliminación realizada correctamente";
                 return RedirectToAction(nameof(Index));
             }
             catch

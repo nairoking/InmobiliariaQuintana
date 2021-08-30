@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -7,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace InmobiliariaQuintana.Models
 {
-    public class RepositorioInquilinos
+    public class RepositorioInquilinos : RepositorioBase
     {
-        string connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=InmobiliariaQBD;Trusted_Connection=True;MultipleActiveResultSets=true";
-        public RepositorioInquilinos()
+        //string connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=InmobiliariaQBD;Trusted_Connection=True;MultipleActiveResultSets=true";
+        public RepositorioInquilinos(IConfiguration configuration) : base(configuration)
         {
 
         }

@@ -1,6 +1,7 @@
 ﻿using InmobiliariaQuintana.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,13 @@ namespace InmobiliariaQuintana.Controllers
 {
     public class PropietariosController : Controller
     {
+        protected readonly IConfiguration configuration;
         RepositorioPropietario repositorio;
 
-        public PropietariosController()
+        public PropietariosController(IConfiguration configuration)
         {
-            repositorio = new RepositorioPropietario();
+            this.configuration = configuration;
+            repositorio = new RepositorioPropietario(configuration);
 
         }
         // GET: PropietariosController

@@ -19,7 +19,7 @@ namespace InmobiliariaQuintana.Models
 			IList<Contrato> res = new List<Contrato>();
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
-				string sql = "SELECT C.IdContrato, C.InquilinoID, C.InmuebleID, C.FechaDesde, C.FechaHasta, C.NombreGarante, C.DNIGarante, C.TelefonoGarante, " +
+				string sql = "SELECT C.IdContrato, C.InquilinoID, C.InmuebleID, C.FechaDesde, C.FechaHasta, C.NombreGarante, C.DNIGarante, C.TelefonoGarante, C.Precio, " +
 					"I.Nombre, I.Apellido, I.Dni, I.Telefono, INM.Direccion, INM.Latitud, INM.Longitud" +
 					" FROM Contratos AS C " +
 					"INNER JOIN Inquilinos AS I ON I.IdInquilino = C.InquilinoID " +
@@ -36,25 +36,26 @@ namespace InmobiliariaQuintana.Models
 							IdContrato = reader.GetInt32(0),
 							InquilinoId = reader.GetInt32(1),
 							InmuebleId = reader.GetInt32(2),
-							FechaDesde = reader.GetString(3),
-							FechaHasta = reader.GetString(4),
+							FechaDesde = reader.GetDateTime(3),
+							FechaHasta = reader.GetDateTime(4),
 							NombreGarante = reader.GetString(5),
 							DNIGarante = reader.GetString(6),
 							TelefonoGarante = reader.GetString(7),
-							
+							Precio = reader.GetDecimal(8),
+
 							inqui = new Inquilinos
 							{
-								Nombre = reader.GetString(8),
-								Apellido = reader.GetString(9),
-								Dni = reader.GetString(10),
-								Telefono = reader.GetString(11),
+								Nombre = reader.GetString(9),
+								Apellido = reader.GetString(10),
+								Dni = reader.GetString(11),
+								Telefono = reader.GetString(12),
 							},
 
 							inmueble = new Inmueble
                             {
-								Direccion = reader.GetString(12),
-								Latitud = reader.GetDecimal(13),
-								Longitud = reader.GetDecimal(14),
+								Direccion = reader.GetString(13),
+								Latitud = reader.GetDecimal(14),
+								Longitud = reader.GetDecimal(15),
                             }
 
 						};
@@ -70,8 +71,8 @@ namespace InmobiliariaQuintana.Models
 			int res = -1;
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
-				string sql = $"INSERT INTO Contratos (InquilinoID, InmuebleID, FechaDesde, FechaHasta, NombreGarante, DNIGarante, TelefonoGarante) " +
-					"VALUES (@inquilinoId, @inmuebleId, @fechaDesde, @fechaHasta, @nombreGarante, @dniGarante, @telefonoGarante);" +
+				string sql = $"INSERT INTO Contratos (InquilinoID, InmuebleID, FechaDesde, FechaHasta, NombreGarante, DNIGarante, TelefonoGarante, Precio) " +
+					"VALUES (@inquilinoId, @inmuebleId, @fechaDesde, @fechaHasta, @nombreGarante, @dniGarante, @telefonoGarante, @precio);" +
 					"SELECT SCOPE_IDENTITY();";//devuelve el id insertado (LAST_INSERT_ID para mysql)
 				using (var command = new SqlCommand(sql, connection))
 				{
@@ -83,6 +84,7 @@ namespace InmobiliariaQuintana.Models
 					command.Parameters.AddWithValue("@nombreGarante", entidad.NombreGarante);
 					command.Parameters.AddWithValue("@dniGarante", entidad.DNIGarante);
 					command.Parameters.AddWithValue("@telefonoGarante", entidad.TelefonoGarante);
+					command.Parameters.AddWithValue("@precio", entidad.Precio);
 					connection.Open();
 					res = Convert.ToInt32(command.ExecuteScalar());
 					entidad.IdContrato = res;
@@ -97,7 +99,7 @@ namespace InmobiliariaQuintana.Models
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
 				string sql = "UPDATE Contratos SET " +
-					"InquilinoId=@inquilinoId, InmuebleId=@inmuebleId, FechaDesde=@fechaDesde, FechaHasta=@fechaHasta, NombreGarante=@nombreGarante, DNIGarante=@dniGarante, TelefonoGarante=@telefonoGarante " +
+					"InquilinoId=@inquilinoId, InmuebleId=@inmuebleId, FechaDesde=@fechaDesde, FechaHasta=@fechaHasta, NombreGarante=@nombreGarante, DNIGarante=@dniGarante, TelefonoGarante=@telefonoGarante , Precio=@precio " +
 					"WHERE IdContrato =@idContrato ";//devuelve el id insertado (LAST_INSERT_ID para mysql)
 				using (var command = new SqlCommand(sql, connection))
 				{
@@ -110,6 +112,7 @@ namespace InmobiliariaQuintana.Models
 					command.Parameters.AddWithValue("@dniGarante", entidad.DNIGarante);
 					command.Parameters.AddWithValue("@telefonoGarante", entidad.TelefonoGarante);
 					command.Parameters.AddWithValue("@idContrato", entidad.IdContrato);
+					command.Parameters.AddWithValue("@precio", entidad.Precio);
 					connection.Open();
 					res = Convert.ToInt32(command.ExecuteScalar());
 					entidad.IdContrato = res;
@@ -124,7 +127,7 @@ namespace InmobiliariaQuintana.Models
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
 				
-				string sql = "SELECT C.IdContrato, C.InquilinoID, C.InmuebleID, C.FechaDesde, C.FechaHasta, C.NombreGarante, C.DNIGarante, C.TelefonoGarante, " +
+				string sql = "SELECT C.IdContrato, C.InquilinoID, C.InmuebleID, C.FechaDesde, C.FechaHasta, C.NombreGarante, C.DNIGarante, C.TelefonoGarante, C.Precio, " +
 					"I.Nombre, I.Apellido, I.Dni, I.Telefono, INM.Direccion, INM.Latitud, INM.Longitud" +
 					" FROM Contratos AS C " +
 					"INNER JOIN Inquilinos AS I ON I.IdInquilino = C.InquilinoID " +
@@ -143,25 +146,26 @@ namespace InmobiliariaQuintana.Models
 							IdContrato = reader.GetInt32(0),
 							InquilinoId = reader.GetInt32(1),
 							InmuebleId = reader.GetInt32(2),
-							FechaDesde = reader.GetString(3),
-							FechaHasta = reader.GetString(4),
+							FechaDesde = reader.GetDateTime(3),
+							FechaHasta = reader.GetDateTime(4),
 							NombreGarante = reader.GetString(5),
 							DNIGarante = reader.GetString(6),
 							TelefonoGarante = reader.GetString(7),
+							Precio = reader.GetDecimal(8),
 
 							inqui = new Inquilinos
 							{
-								Nombre = reader.GetString(8),
-								Apellido = reader.GetString(9),
-								Dni = reader.GetString(10),
-								Telefono = reader.GetString(11),
+								Nombre = reader.GetString(9),
+								Apellido = reader.GetString(10),
+								Dni = reader.GetString(11),
+								Telefono = reader.GetString(12),
 							},
 
 							inmueble = new Inmueble
 							{
-								Direccion = reader.GetString(12),
-								Latitud = reader.GetDecimal(13),
-								Longitud = reader.GetDecimal(14),
+								Direccion = reader.GetString(13),
+								Latitud = reader.GetDecimal(14),
+								Longitud = reader.GetDecimal(15),
 							}
 
 						};

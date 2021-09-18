@@ -1,4 +1,5 @@
 ﻿using InmobiliariaQuintana.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -30,7 +31,8 @@ namespace InmobiliariaQuintana.Controllers
         // GET: PropietariosController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var entidad = repositorio.ObtenerPorId(id);
+            return View(entidad);
         }
 
         // GET: PropietariosController/Create
@@ -83,6 +85,7 @@ namespace InmobiliariaQuintana.Controllers
         }
 
         // GET: PropietariosController/Delete/5
+        [Authorize(Policy = "Administrador")]
         public ActionResult Delete(int id)
         {
             var entidad = repositorio.ObtenerPorId(id);
@@ -92,6 +95,7 @@ namespace InmobiliariaQuintana.Controllers
         // POST: PropietariosController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Administrador")]
         public ActionResult Delete(int id, Propietario p)
         {
             try

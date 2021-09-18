@@ -61,7 +61,7 @@
                 @Html.DisplayFor(modelItem => item.Clave)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.IdPropietario  }) |
+                <i class="fas fa-pencil-alt"> @Html.ActionLink("Edit", "Edit", new { id = item.IdPropietario }) |</i> 
                 @Html.ActionLink("Details", "Details", new { id=item.IdPropietario  }) |
                 @Html.ActionLink("Delete", "Delete", new {  id=item.IdPropietario  })
             </td>

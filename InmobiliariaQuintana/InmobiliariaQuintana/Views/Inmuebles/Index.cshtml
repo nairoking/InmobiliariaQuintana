@@ -61,9 +61,10 @@
                 @(item.Duenio.Nombre + " " + item.Duenio.Apellido)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.IdInmueble  }) |
-                @Html.ActionLink("Details", "Details", new { id=item.IdInmueble  }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.IdInmueble  })
+               
+                <a class="btn btn-primary" asp-action="Edit" asp-controller="Inmuebles" asp-route-id="@item.IdInmueble" title="Edit"> </a>
+                <a class="btn btn-primary" asp-action="Details" asp-controller="Inmuebles" asp-route-id="@item.IdInmueble" title="Details"> </a>
+                <a class="btn btn-primary" asp-action="Delete" asp-controller="Inmuebles" asp-route-id="@item.IdInmueble" title="Delete"> </a>
             </td>
         </tr>
 }

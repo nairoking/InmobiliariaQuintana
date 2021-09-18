@@ -1,0 +1,51 @@
+﻿@model InmobiliariaQuintana.Models.Pago
+
+@{
+    ViewData["Title"] = "Create";
+    int idContrato = ViewBag.contrato;
+}
+
+<h1>Create</h1>
+
+<h4>Pago</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
+            <div class="form-group">
+                <label asp-for="NumeroPago" class="control-label"></label>
+                <input asp-for="NumeroPago" class="form-control" />
+                <span asp-validation-for="NumeroPago" class="text-danger"></span>
+            </div>
+          
+            <div class="form-group">
+                <label asp-for="Monto" class="control-label"></label>
+                <input asp-for="Monto" class="form-control" />
+                <span asp-validation-for="Monto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContratoId" class="control-label"></label>
+                <input asp-for="ContratoId" class="form-control" value="@(idContrato)" />
+                <span asp-validation-for="ContratoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaUpdate" class="control-label"></label>
+                <input asp-for="FechaUpdate" class="form-control" />
+                <span asp-validation-for="FechaUpdate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

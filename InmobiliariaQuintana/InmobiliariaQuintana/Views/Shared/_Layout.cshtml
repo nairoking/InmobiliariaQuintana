@@ -5,7 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - InmobiliariaQuintana</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="fontawesome/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" />
+    <script type="text/javascript" onl>
+
+        function login() {
+
+            $("#loginModal").modal("show");
+        }
+
+        function datos(q) {
+            $.ajax({//documentación: https://api.jquery.com/jquery.ajax/
+                url: `@Url.Action("Datos", "Usuario")`,
+                method: "POST",
+                data: {
+                    correo: q.toString()
+                },
+                dataType: "json"
+            }).done(res => {
+                $.each(res, function (i, item) {
+
+                    for (var val in item) {
+
+
+                        $("#IdUsu")[0].value = item.id;
+                        $("#NombreUsu")[0].value = item.nombre;
+                        $("#ApellidoUsu")[0].value = item.apellido;
+                        $("#EmailUsu")[0].value = item.email;
+
+                        $("#imgPerfil")[0].src = item.avatar;
+                    }
+                });
+            }).fail(res => {
+                console.log("Error: ", res);
+            });
+            $("#editarModalUsu").modal("show");
+
+
+        }
+            
+        
+    </script>
 </head>
 <body>
     <header>
@@ -18,30 +58,124 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
-                        </li>
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <a class="py-2 btn btn-warning  text-light" asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Inicio</a>
+                            <a class="py-2 d-none d-md-inline-block float-right btn btn-warning  text-light" href="javascript:login()">
+                                <i class="fas fa-sign-in-alt"></i> Acceder
+                            </a>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+                            </li>
+                            @if (User.IsInRole("Administrador") || User.IsInRole("SuperAdministrador"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Inquilinos" asp-action="Index">Inquilinos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Propietarios" asp-action="Index">Propietarios</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Inmuebles" asp-action="Index">Inmuebles</a>
+                                </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Inquilinos" asp-action="Index">Inquilinos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Propietarios" asp-action="Index">Propietarios</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Inmuebles" asp-action="Index">Inmuebles</a>
-                        </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Contrato" asp-action="Index">Contratos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Index">Usuarios</a>
+                                </li>
+                               
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Contrato" asp-action="Index">Contrato</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacidad</a>
-                        </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacidad</a>
+                                </li>
+                                <div class="dropdown">
+                                    <a class="btn btn-warning dropdown-toggle text-light" href="#" role="button" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent" data-display="static">
+                                        <i class="fas fa-user"></i> @User.Identity.Name
+                                    </a>
+
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item text-dark" href='javascript:datos("@User.Identity.Name.ToString()")'><i class="fas fa-users-cog"></i> Perfil</a>
+                                        <a class="dropdown-item text-dark" asp-controller="Usuario" asp-action="Logout"><i class="fas fa-sign-out-alt"></i> Salir</a>
+                                    </div>
+                                </div>
+
+                            }
+                            else
+                            {
+                                @if (User.IsInRole("Empleado"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Inquilinos" asp-action="Index">Inquilinos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Propietarios" asp-action="Index">Propietarios</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Inmuebles" asp-action="Index">Inmuebles</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Contrato" asp-action="Index">Contratos</a>
+                                    </li>
+                                    
+                            
+
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacidad</a>
+                                    </li>
+                                    <div class="dropdown">
+                                        <a class="btn btn-warning dropdown-toggle text-light" href="#" role="button" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent" data-display="static">
+                                            <i class="fas fa-user"></i> @User.Identity.Name
+                                        </a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item text-dark" href='javascript:datos("@User.Identity.Name.ToString()")'><i class="fas fa-users-cog"></i> Perfil</a>
+                                            <a class="dropdown-item text-dark" asp-controller="Usuario" asp-action="Logout"><i class="fas fa-sign-out-alt"></i> Salir</a>
+                                        </div>
+                                    </div>
+
+                                }
+                            }
+                        }
                     </ul>
                 </div>
             </div>
         </nav>
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel">Iniciar Sesion</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form asp-controller="Usuario" asp-action="Login">
+
+                            <div class="form-group">
+                                <label for="Usuario" class="control-label">Usuario </label>
+                                <input type="email" name="Usuario" class="form-control" required />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Clave" class="control-label">Contraseña</label>
+                                <input type="password" name="Clave" class="form-control" required />
+                                <span for="Clave" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Iniciar Sesion" class="btn btn-primary" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -58,5 +192,5 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
-</body>
+    </body>
 </html>

@@ -1,4 +1,5 @@
 ﻿using InmobiliariaQuintana.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +23,8 @@ namespace InmobiliariaQuintana.Controllers
         // GET: InquilinosController
         public ActionResult Index()
         {
+            ViewBag.Roles = Usuario.ObtenerRoles();
+            ViewBag.error = TempData["error"];
             var lista = repositorio.ObtenerTodos();
             return View(lista);
         }
@@ -29,8 +32,8 @@ namespace InmobiliariaQuintana.Controllers
         // GET: InquilinosController/Details/5
         public ActionResult Details(int id)
         {
-            
-            return View();
+            var entidad = repositorio.ObtenerPorId(id);
+            return View(entidad);
         }
 
         // GET: InquilinosController/Create
@@ -51,6 +54,7 @@ namespace InmobiliariaQuintana.Controllers
             }
             catch (Exception ex)
             {
+                TempData["error"] = ex.Message;
                 return View();
             }
         }
@@ -86,6 +90,7 @@ namespace InmobiliariaQuintana.Controllers
         }
 
         // GET: InquilinosController/Delete/5
+        [Authorize(Policy = "Administrador")]
         public ActionResult Delete(int id)
         {
             var entidad = repositorio.ObtenerPorId(id);
@@ -95,6 +100,7 @@ namespace InmobiliariaQuintana.Controllers
         // POST: InquilinosController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Administrador")]
         public ActionResult Delete(int id, Inquilinos inqui)
         {
             try
@@ -103,9 +109,10 @@ namespace InmobiliariaQuintana.Controllers
                 TempData["Mensaje"] = "Eliminación realizada correctamente";
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                TempData["error"] = ex.Message;
+                return RedirectToAction(nameof(Index));
             }
         }
     }

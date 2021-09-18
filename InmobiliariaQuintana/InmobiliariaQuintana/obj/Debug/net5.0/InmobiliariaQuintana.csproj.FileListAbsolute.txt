@@ -137,3 +137,16 @@ C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\Inm
 C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Contrato\Create.cshtml.g.cs
 C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Contrato\Edit.cshtml.g.cs
 C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Contrato\Delete.cshtml.g.cs
+C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Usuario\Index.cshtml.g.cs
+C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Usuario\Create.cshtml.g.cs
+C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Pago\Index.cshtml.g.cs
+C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Pago\Create.cshtml.g.cs
+C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Inquilinos\Details.cshtml.g.cs
+C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Home\Restringido.cshtml.g.cs
+C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Propietarios\Details.cshtml.g.cs
+C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Contrato\Details.cshtml.g.cs
+C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Pago\Edit.cshtml.g.cs
+C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Pago\Delete.cshtml.g.cs
+C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Pago\Details.cshtml.g.cs
+C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Usuario\Edit.cshtml.g.cs
+C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Usuario\Delete.cshtml.g.cs

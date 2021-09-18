@@ -1,8 +1,19 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Boolean abrir = (Boolean)ViewData["abrir"];
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Bienvenido</h1>
+    @if (abrir)
+    {
+<h1> Debe Iniciar Sesion para poder ingresar a algun recurso</h1>}
 </div>
+@if (abrir)
+{
+
+@section Scripts {
+
+    <script type="text/javascript">login();</script>
+
+}}

@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace InmobiliariaQuintana
@@ -24,6 +27,21 @@ namespace InmobiliariaQuintana
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+               .AddCookie(options =>//el sitio web valida con cookie
+                {
+                   options.LoginPath = "/Home/Index";
+                   options.LogoutPath = "/Usuarios/Logout";
+                   options.AccessDeniedPath = "/Home/Restringido";
+               });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Empleado", policy => policy.RequireClaim(ClaimTypes.Role, "Administrador", "Empleado"));
+                options.AddPolicy("Administrador", policy => policy.RequireRole("Administrador", "SuperAdministrador"));
+            });
+            services.AddMvc();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,8 +61,14 @@ namespace InmobiliariaQuintana
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseCookiePolicy(new CookiePolicyOptions
+            {
+                MinimumSameSitePolicy = SameSiteMode.None,
+            });
 
+            app.UseAuthentication();
             app.UseAuthorization();
+          
 
             app.UseEndpoints(endpoints =>
             {

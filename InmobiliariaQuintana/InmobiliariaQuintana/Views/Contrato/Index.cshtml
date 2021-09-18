@@ -36,42 +36,59 @@
             <th>
                 @Html.DisplayNameFor(model => model.TelefonoGarante)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdContrato)
-            </td>
-            <td>
-                @(item.inqui.Nombre + " " + item.inqui.Apellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InmuebleId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaDesde)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaHasta)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreGarante)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DNIGarante)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TelefonoGarante)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.IdContrato  }) |
-                @Html.ActionLink("Details", "Details", new {  id=item.IdContrato  }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.IdContrato  })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdContrato)
+                </td>
+                <td>
+                    @(item.inqui.Nombre + " " + item.inqui.Apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InmuebleId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaDesde)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaHasta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreGarante)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DNIGarante)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TelefonoGarante)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Precio)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IdContrato }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.IdContrato }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IdContrato })|
+                    
+
+                    <!-- <a class="btn btn-primary" asp-action="Edit" asp-controller="Contrato" asp-route-id="@item.IdContrato" title="Edit"><i class="fas fa-pencil-alt"></i> </a>
+    <a class="btn btn-primary" asp-action="Details" asp-controller="Contrato" asp-route-id="@item.IdContrato" title="Details"> </a>
+    <a class="btn btn-primary" asp-action="Delete" asp-controller="Contrato" asp-route-id="@item.IdContrato" title="Delete"> </a>
+    
+                        -->
+                    <a class="btn btn-primary" asp-action="Index" asp-controller="Pago" asp-route-id="@item.IdContrato" title="Pagos">Pagos </a>
+
+
+                </td>
+                        </tr>
+                }
+                    </tbody>
+                </table>

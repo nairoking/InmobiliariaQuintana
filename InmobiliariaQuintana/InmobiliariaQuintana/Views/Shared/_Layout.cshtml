@@ -49,9 +49,10 @@
 </head>
 <body bgcolor="#201B06">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-warning border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-warning border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">InmobiliariaQuintana</a>
+               
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><i class="fab fa-quora"></i> uintana Inmuebles</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -60,36 +61,34 @@
                     <ul class="navbar-nav flex-grow-1">
                         @if (!User.Identity.IsAuthenticated)
                         {
-                            <a class="py-2 btn btn-warning  text-light" asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Inicio</a>
+
                             <a class="py-2 d-none d-md-inline-block float-right btn btn-warning  text-light" href="javascript:login()">
                                 <i class="fas fa-sign-in-alt"></i> Acceder
                             </a>
                         }
                         else
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
-                            </li>
+
                             @if (User.IsInRole("Administrador") || User.IsInRole("SuperAdministrador"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Inquilinos" asp-action="Index">Inquilinos</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Inquilinos" asp-action="Index"><i class="fas fa-user"></i>Inquilinos</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Propietarios" asp-action="Index">Propietarios</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Propietarios" asp-action="Index"><i class="fas fa-user-circle"></i>Propietarios</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Inmuebles" asp-action="Index">Inmuebles</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Inmuebles" asp-action="Index"><i class="fas fa-house-user"></i>Inmuebles</a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Contrato" asp-action="Index">Contratos</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Contrato" asp-action="Index"><i class="fas fa-file-signature"></i>Contratos</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Pago" asp-action="Index">Pago</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Pago" asp-action="Index"><i class="fas fa-cash-register"></i>Pago</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Index">Usuarios</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Usuario" asp-action="Index"><i class="fas fa-user-shield"></i>Usuarios</a>
                                 </li>
 
 
@@ -113,20 +112,20 @@
                                 @if (User.IsInRole("Empleado"))
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Inquilinos" asp-action="Index">Inquilinos</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Inquilinos" asp-action="Index"><i class="fas fa-user"></i>Inquilinos</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Propietarios" asp-action="Index">Propietarios</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Propietarios" asp-action="Index"><i class="fas fa-user-circle"></i>Propietarios</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Inmuebles" asp-action="Index">Inmuebles</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Inmuebles" asp-action="Index"><i class="fas fa-house-user"></i>Inmuebles</a>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Contrato" asp-action="Index">Contratos</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Contrato" asp-action="Index"><i class="fas fa-file-signature"></i>Contratos</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Pago" asp-action="Index">Pago</a>
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Pago" asp-action="Index"><i class="fas fa-cash-register"></i>Pago</a>
                                     </li>
 
 
@@ -187,6 +186,7 @@
             @RenderBody()
         </main>
     </div>
+ 
 
     <footer class="border-top footer text-muted">
         <div class="container">

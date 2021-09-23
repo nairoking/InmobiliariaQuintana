@@ -15,9 +15,7 @@
 <table class="table table-warning">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
+           
             <th>
                 @Html.DisplayNameFor(model => model.NumeroPago)
             </th>
@@ -40,9 +38,7 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
+                
                 <td>
                     @Html.DisplayFor(modelItem => item.NumeroPago)
                 </td>
@@ -59,10 +55,10 @@
                     @Html.DisplayFor(modelItem => item.FechaUpdate)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
 
+                    <a class="btn btn-warning" asp-action="Edit" asp-controller="Pago" asp-route-id="@item.Id" title="Edit"><i class="fas fa-pencil-alt"></i> </a>
+                    <a class="btn btn-warning" asp-action="Details" asp-controller="Pago" asp-route-id="@item.Id" title="Details"><i class="far fa-list-alt"></i> </a>
+                    <a class="btn btn-warning" asp-action="Delete" asp-controller="Pago" asp-route-id="@item.Id" title="Delete"> <i class="fas fa-trash-alt"></i></a>
                 </td>
             </tr>
         }

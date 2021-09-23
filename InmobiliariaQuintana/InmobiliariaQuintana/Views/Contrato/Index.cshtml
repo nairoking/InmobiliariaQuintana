@@ -12,9 +12,7 @@
 <table class="table table-warning">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdContrato)
-            </th>
+           
             <th>
                 @Html.DisplayNameFor(model => model.InquilinoId)
             </th>
@@ -46,9 +44,7 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdContrato)
-                </td>
+                
                 <td>
                     @(item.inqui.Nombre + " " + item.inqui.Apellido)
                 </td>

@@ -12,9 +12,7 @@
 <table class="table table-warning">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdPropietario)
-            </th>
+           
             <th>
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
@@ -39,9 +37,7 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdPropietario)
-            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
@@ -66,7 +62,7 @@
                 <a class="btn btn-warning" asp-action="Edit" asp-controller="Propietarios" asp-route-id="@item.IdPropietario" title="Edit"><i class="fas fa-pencil-alt"></i> </a>
                 <a class="btn btn-warning" asp-action="Details" asp-controller="Propietarios" asp-route-id="@item.IdPropietario" title="Details"><i class="far fa-list-alt"></i> </a>
                 <a class="btn btn-warning" asp-action="Delete" asp-controller="Propietarios" asp-route-id="@item.IdPropietario" title="Delete"> <i class="fas fa-trash-alt"></i></a>
-                <a class="btn btn-warning" asp-action="VerInmuebles" asp-controller="Propietarios" asp-route-id="@item.IdPropietario" title="Ver Inmuebles"> <i class="fas fa-trash-alt"></i></a>
+                <a class="btn btn-warning" asp-action="VerInmuebles" asp-controller="Propietarios" asp-route-id="@item.IdPropietario" title="Ver Inmuebles"> <i class="fas fa-house-user"></i></a>
             </td>
         </tr>
 }

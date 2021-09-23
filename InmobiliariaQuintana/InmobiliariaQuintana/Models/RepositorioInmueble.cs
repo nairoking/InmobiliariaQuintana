@@ -20,8 +20,8 @@ namespace InmobiliariaQuintana.Models
 			int res = -1;
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
-				string sql = $"INSERT INTO Inmuebles (Direccion, Ambientes, Superficie, Latitud, Longitud, PropietarioId) " +
-					"VALUES (@direccion, @ambientes, @superficie, @latitud, @longitud, @propietarioId);" +
+				string sql = $"INSERT INTO Inmuebles (Direccion, Ambientes, Superficie, Latitud, Longitud, PropietarioId, Estado) " +
+					"VALUES (@direccion, @ambientes, @superficie, @latitud, @longitud, @propietarioId, @estado);" +
 					"SELECT SCOPE_IDENTITY();";//devuelve el id insertado (LAST_INSERT_ID para mysql)
 				using (var command = new SqlCommand(sql, connection))
 				{
@@ -32,6 +32,7 @@ namespace InmobiliariaQuintana.Models
 					command.Parameters.AddWithValue("@latitud", entidad.Latitud);
 					command.Parameters.AddWithValue("@longitud", entidad.Longitud);
 					command.Parameters.AddWithValue("@propietarioId", entidad.PropietarioId);
+					command.Parameters.AddWithValue("@estado", entidad.Estado);
 					connection.Open();
 					res = Convert.ToInt32(command.ExecuteScalar());
 					entidad.IdInmueble = res;
@@ -46,7 +47,7 @@ namespace InmobiliariaQuintana.Models
 			IList<Inmueble> res = new List<Inmueble>();
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
-				string sql = "SELECT IdInmueble, Direccion, Ambientes, Superficie, Latitud, Longitud, PropietarioId," +
+				string sql = "SELECT IdInmueble, Direccion, Ambientes, Superficie, Latitud, Longitud, PropietarioId, Estado, " +
 					" p.Nombre, p.Apellido" +
 					" FROM Inmuebles i INNER JOIN Propietarios p ON i.PropietarioId = p.IdPropietario";
 				using (SqlCommand command = new SqlCommand(sql, connection))
@@ -65,11 +66,12 @@ namespace InmobiliariaQuintana.Models
 							Latitud = reader.GetDecimal(4),
 							Longitud = reader.GetDecimal(5),
 							PropietarioId = reader.GetInt32(6),
+							Estado = reader.GetString(7),
 							Duenio = new Propietario
 							{
 								IdPropietario = reader.GetInt32(6),
-								Nombre = reader.GetString(7),
-								Apellido = reader.GetString(8),
+								Nombre = reader.GetString(8),
+								Apellido = reader.GetString(9),
 							}
 						};
 						res.Add(entidad);
@@ -85,7 +87,7 @@ namespace InmobiliariaQuintana.Models
 			Inmueble entidad = null;
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
-				string sql = $"SELECT IdPropietario, Direccion, Ambientes, Superficie, Latitud, Longitud, PropietarioId, p.Nombre, p.Apellido" +
+				string sql = $"SELECT IdPropietario, Direccion, Ambientes, Superficie, Latitud, Longitud, PropietarioId, Estado, p.Nombre, p.Apellido" +
 					$" FROM Inmuebles i INNER JOIN Propietarios p ON i.PropietarioId = p.IdPropietario" +
 					$" WHERE PropietarioId=@idPropietario";
 				using (SqlCommand command = new SqlCommand(sql, connection))
@@ -105,11 +107,12 @@ namespace InmobiliariaQuintana.Models
 							Latitud = reader.GetDecimal(4),
 							Longitud = reader.GetDecimal(5),
 							PropietarioId = reader.GetInt32(6),
+							Estado = reader.GetString(7),
 							Duenio = new Propietario
 							{
 								IdPropietario = reader.GetInt32(6),
-								Nombre = reader.GetString(7),
-								Apellido = reader.GetString(8),
+								Nombre = reader.GetString(8),
+								Apellido = reader.GetString(9),
 							}
 						};
 						res.Add(entidad);
@@ -124,7 +127,7 @@ namespace InmobiliariaQuintana.Models
 			Inmueble entidad = null;
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
-				string sql = $"SELECT IdInmueble, Direccion, Ambientes, Superficie, Latitud, Longitud, PropietarioId, p.Nombre, p.Apellido" +
+				string sql = $"SELECT IdInmueble, Direccion, Ambientes, Superficie, Latitud, Longitud, PropietarioId, Estado, p.Nombre, p.Apellido" +
 					$" FROM Inmuebles i INNER JOIN Propietarios p ON i.PropietarioId = p.IdPropietario" +
 					$" WHERE IdInmueble=@idInmueble";
 				using (SqlCommand command = new SqlCommand(sql, connection))
@@ -144,11 +147,12 @@ namespace InmobiliariaQuintana.Models
 							Latitud = reader.GetDecimal(4),
 							Longitud = reader.GetDecimal(5),
 							PropietarioId = reader.GetInt32(6),
+							Estado = reader.GetString(7),
 							Duenio = new Propietario
 							{
 								IdPropietario = reader.GetInt32(6),
-								Nombre = reader.GetString(7),
-								Apellido = reader.GetString(8),
+								Nombre = reader.GetString(8),
+								Apellido = reader.GetString(9),
 							}
 						};
 					}
@@ -179,7 +183,7 @@ namespace InmobiliariaQuintana.Models
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
 				string sql = "UPDATE Inmuebles SET " +
-					"Direccion=@direccion, Ambientes=@ambientes, Superficie=@superficie, Latitud=@latitud, Longitud=@longitud, PropietarioId=@propietarioId " +
+					"Direccion=@direccion, Ambientes=@ambientes, Superficie=@superficie, Latitud=@latitud, Longitud=@longitud, PropietarioId=@propietarioId, Estado = @estado " +
 					"WHERE IdInmueble = @idInmueble";
 				using (SqlCommand command = new SqlCommand(sql, connection))
 				{
@@ -189,6 +193,8 @@ namespace InmobiliariaQuintana.Models
 					command.Parameters.AddWithValue("@latitud", entidad.Latitud);
 					command.Parameters.AddWithValue("@longitud", entidad.Longitud);
 					command.Parameters.AddWithValue("@propietarioId", entidad.PropietarioId);
+					command.Parameters.AddWithValue("@estado", entidad.Estado);
+
 					command.Parameters.AddWithValue("@idInmueble", entidad.IdInmueble);
 					command.CommandType = CommandType.Text;
 					connection.Open();

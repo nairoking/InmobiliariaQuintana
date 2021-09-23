@@ -15,11 +15,13 @@ namespace InmobiliariaQuintana.Controllers
         protected readonly IConfiguration configuration;
         RepositorioInmueble repositorio;
         RepositorioPropietario repoPropietario;
+        RepositorioContrato repoContrato;
         public InmueblesController(IConfiguration configuration)
         {
             this.configuration = configuration;
             repositorio = new RepositorioInmueble(configuration);
             repoPropietario = new RepositorioPropietario(configuration);
+            repoContrato = new RepositorioContrato(configuration);
         }
         // GET: InmueblesController
         public ActionResult Index()
@@ -28,6 +30,20 @@ namespace InmobiliariaQuintana.Controllers
             ViewBag.Propietarios = repoPropietario.ObtenerTodos();
             ViewBag.error = TempData["error"];
             return View(lista);
+        }
+        // GET: InmueblesController
+        public ActionResult Disponibles()
+        {
+            var lista = repositorio.ObtenerTodos();
+            var aux = new List<Inmueble>();
+            foreach(var i in lista)
+            {
+                if (i.Estado == "si")
+                    aux.Add(i);
+            }
+            ViewBag.Propietarios = repoPropietario.ObtenerTodos();
+            ViewBag.error = TempData["error"];
+            return View(aux);
         }
 
         // GET: InmueblesController/Details/5
@@ -129,5 +145,16 @@ namespace InmobiliariaQuintana.Controllers
                 return View();
             }
         }
+
+        // GET: InmueblesController/Create
+        public ActionResult Contratos(int id)
+        {
+            ViewBag.Propietarios = repoPropietario.ObtenerTodos();
+            ViewBag.Inmuebles = repositorio.ObtenerTodos();
+            var lista = repoContrato.ObtenerPorInmueble(id);
+            return View(lista);
+        }
+
+      
     }
 }

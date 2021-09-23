@@ -1,0 +1,80 @@
+﻿@model IEnumerable<InmobiliariaQuintana.Models.Inmueble>
+
+@{
+    ViewData["Title"] = "Disponibles";
+}
+
+<h1>Disponibles</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<a class="btn btn-warning" asp-action="Index" asp-controller="Inmuebles"  title="Edit">Ver Todos </a>
+
+<table class="table table-warning" id="Todos">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Direccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ambientes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Superficie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Latitud)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Longitud)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PropietarioId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Direccion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ambientes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Superficie)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Latitud)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Longitud)
+                </td>
+                <td>
+                    @(item.Duenio.Nombre + " " + item.Duenio.Apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td>
+
+                    <a class="btn btn-warning" asp-action="Edit" asp-controller="Inmuebles" asp-route-id="@item.IdInmueble" title="Edit"><i class="fas fa-pencil-alt"></i> </a>
+                    <a class="btn btn-warning" asp-action="Details" asp-controller="Inmuebles" asp-route-id="@item.IdInmueble" title="Details"><i class="far fa-list-alt"></i> </a>
+                    <a class="btn btn-warning" asp-action="Delete" asp-controller="Inmuebles" asp-route-id="@item.IdInmueble" title="Delete"> <i class="fas fa-trash-alt"></i></a>
+                </td>
+            </tr>
+
+
+
+        }
+    </tbody>
+</table>

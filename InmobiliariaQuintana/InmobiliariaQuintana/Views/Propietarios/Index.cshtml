@@ -9,7 +9,7 @@
 <p>
     <a asp-action="Create">Crear Propietario</a>
 </p>
-<table class="table">
+<table class="table table-warning">
     <thead>
         <tr>
             <th>
@@ -61,10 +61,12 @@
                 @Html.DisplayFor(modelItem => item.Clave)
             </td>
             <td>
-                <i class="fas fa-pencil-alt"> @Html.ActionLink("Edit", "Edit", new { id = item.IdPropietario }) |</i>
-                @Html.ActionLink("Details", "Details", new { id = item.IdPropietario }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.IdPropietario })|
-                @Html.ActionLink("Ver Inmuebles", "VerInmuebles", new { id = item.IdPropietario })
+                
+
+                <a class="btn btn-warning" asp-action="Edit" asp-controller="Propietarios" asp-route-id="@item.IdPropietario" title="Edit"><i class="fas fa-pencil-alt"></i> </a>
+                <a class="btn btn-warning" asp-action="Details" asp-controller="Propietarios" asp-route-id="@item.IdPropietario" title="Details"><i class="far fa-list-alt"></i> </a>
+                <a class="btn btn-warning" asp-action="Delete" asp-controller="Propietarios" asp-route-id="@item.IdPropietario" title="Delete"> <i class="fas fa-trash-alt"></i></a>
+                <a class="btn btn-warning" asp-action="VerInmuebles" asp-controller="Propietarios" asp-route-id="@item.IdPropietario" title="Ver Inmuebles"> <i class="fas fa-trash-alt"></i></a>
             </td>
         </tr>
 }

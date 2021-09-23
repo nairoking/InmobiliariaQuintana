@@ -29,7 +29,13 @@ namespace InmobiliariaQuintana.Controllers
             repoPago = new RepositorioPago(configuration);
         }
         // GET: PagoController
-        public ActionResult Index(int id)
+        public ActionResult Index()
+        {
+            ViewBag.Roles = Usuario.ObtenerRoles();
+            var lista = repoPago.ObtenerTodos();
+            return View(lista);
+        }
+        public ActionResult PagosPorContrato(int id)
         {
             ViewBag.Roles = Usuario.ObtenerRoles();
             if (id != 0)

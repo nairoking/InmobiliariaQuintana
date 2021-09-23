@@ -4,17 +4,22 @@
     ViewData["Title"] = "Index";
 }
 
+
 <h1>Inmuebles</h1>
 
 <p>
     <a asp-action="Create">Crear Inmueble</a>
 </p>
-<table class="table">
+<a class="btn btn-warning" asp-action="Disponibles" asp-controller="Inmuebles"  title="Edit">Ver Solo Disponibles </a>
+
+<br />
+
+
+
+<table class="table table-warning" id="Todos">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdInmueble)
-            </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.Direccion)
             </th>
@@ -33,40 +38,49 @@
             <th>
                 @Html.DisplayNameFor(model => model.PropietarioId)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdInmueble)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Direccion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ambientes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Superficie)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Latitud)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Longitud)
-            </td>
-            <td>
-                @(item.Duenio.Nombre + " " + item.Duenio.Apellido)
-            </td>
-            <td>
-               
-                <a class="btn btn-primary" asp-action="Edit" asp-controller="Inmuebles" asp-route-id="@item.IdInmueble" title="Edit"> </a>
-                <a class="btn btn-primary" asp-action="Details" asp-controller="Inmuebles" asp-route-id="@item.IdInmueble" title="Details"> </a>
-                <a class="btn btn-primary" asp-action="Delete" asp-controller="Inmuebles" asp-route-id="@item.IdInmueble" title="Delete"> </a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Direccion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ambientes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Superficie)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Latitud)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Longitud)
+                </td>
+                <td>
+                    @(item.Duenio.Nombre + " " + item.Duenio.Apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td>
+
+                    <a class="btn btn-warning" asp-action="Edit" asp-controller="Inmuebles" asp-route-id="@item.IdInmueble" title="Edit"><i class="fas fa-pencil-alt"></i> </a>
+                    <a class="btn btn-warning" asp-action="Details" asp-controller="Inmuebles" asp-route-id="@item.IdInmueble" title="Details"><i class="far fa-list-alt"></i> </a>
+                    <a class="btn btn-warning" asp-action="Delete" asp-controller="Inmuebles" asp-route-id="@item.IdInmueble" title="Delete"> <i class="fas fa-trash-alt"></i></a>
+                    <a class="btn btn-warning" asp-action="Contratos" asp-controller="Inmuebles" asp-route-id="@item.IdInmueble" title="Ver contratos"> <i class="fas fa-file-signature"></i></a>
+                </td>
+            </tr>
+
+
+
+        }
     </tbody>
 </table>

@@ -9,7 +9,7 @@
 <p>
     <a asp-action="Create">Crear nuevo contrato</a>
 </p>
-<table class="table">
+<table class="table table-warning">
     <thead>
         <tr>
             <th>
@@ -74,17 +74,15 @@
                     @Html.DisplayFor(modelItem => item.Precio)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.IdContrato }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.IdContrato }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.IdContrato })|
+                  
                     
 
-                    <!-- <a class="btn btn-primary" asp-action="Edit" asp-controller="Contrato" asp-route-id="@item.IdContrato" title="Edit"><i class="fas fa-pencil-alt"></i> </a>
-    <a class="btn btn-primary" asp-action="Details" asp-controller="Contrato" asp-route-id="@item.IdContrato" title="Details"> </a>
-    <a class="btn btn-primary" asp-action="Delete" asp-controller="Contrato" asp-route-id="@item.IdContrato" title="Delete"> </a>
+                    <a class="btn btn-warning" asp-action="Edit" asp-controller="Contrato" asp-route-id="@item.IdContrato" title="Edit"><i class="fas fa-pencil-alt"></i> </a>
+                    <a class="btn btn-warning" asp-action="Details" asp-controller="Contrato" asp-route-id="@item.IdContrato" title="Details"><i class="far fa-list-alt"></i> </a>
+                    <a class="btn btn-warning" asp-action="Delete" asp-controller="Contrato" asp-route-id="@item.IdContrato" title="Delete"> <i class="fas fa-trash-alt"></i></a>
     
-                        -->
-                    <a class="btn btn-primary" asp-action="Index" asp-controller="Pago" asp-route-id="@item.IdContrato" title="Pagos">Pagos </a>
+                      
+                    <a class="btn btn-warning" asp-action="PagosPorContrato" asp-controller="Pago" asp-route-id="@item.IdContrato" title="Pagos"><i class="fas fa-money-bill-alt"></i> </a>
 
 
                 </td>

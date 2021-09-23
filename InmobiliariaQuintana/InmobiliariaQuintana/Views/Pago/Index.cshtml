@@ -2,22 +2,17 @@
 
 @{
     ViewData["Title"] = "Index";
-    int numeroPago = Model.Count() + 1;
-    int idContrato = ViewBag.idContratoR;
-    var hoy = DateTime.Now.Date.ToString();
-    var contrato = ViewBag.contrato;
-    var saldo = ViewBag.contrato.Precio;
-    
+  
+
 }
 
 <h1>Index</h1>
 
-<p>
-    
-    @Html.ActionLink("Crear Pago", "Create", new { id = idContrato })
-</p>
+<a class="btn btn-warning" asp-action="Create" asp-controller="Pago"  title="Edit">Nuevo Pago</a>
 
-<table class="table">
+
+
+<table class="table table-warning">
     <thead>
         <tr>
             <th>

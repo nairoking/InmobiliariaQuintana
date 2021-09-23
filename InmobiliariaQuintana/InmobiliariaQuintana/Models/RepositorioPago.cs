@@ -83,10 +83,11 @@ namespace InmobiliariaQuintana.Models
             IList<Pago> lista = new List<Pago>();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string sql = @"SELECT p.id,p.NumeroPago,p.fechaPago,p.monto,p.contratoId,c.idInquilino,c.idInmueble,inm.direccion,c.precio,p.fechaUpdate
-                FROM Pago p inner join Contrato c on p.contratoId = c.id
-                inner join Inquilino i on c.idInquilino= i.idInquilino 
-                inner join Inmueble inm on inm.id=c.idInmueble";
+                string sql = @"SELECT p.id,p.NumeroPago,p.FechaPago,p.Monto,p.ContratoId, p.FechaUpdate,
+                c.InquilinoId,c.InmuebleId,c.FechaDesde, c.FechaHasta, c.NombreGarante, c.DNIGarante, c.TelefonoGarante
+                FROM Pago p inner join Contratos c on p.contratoId = c.idContrato
+                inner join Inquilinos i on c.InquilinoId= i.idInquilino 
+                inner join Inmuebles inm on inm.idInmueble=c.InmuebleId";
                 using (SqlCommand com = new SqlCommand(sql, connection))
                 {
                     com.CommandType = CommandType.Text;
@@ -105,10 +106,11 @@ namespace InmobiliariaQuintana.Models
                                 FechaPago = reader.GetDateTime(2),
                                 Monto = reader.GetDecimal(3),
                                 ContratoId = reader.GetInt32(4),
+                                FechaUpdate = reader["fechaUpdate"] != DBNull.Value ? reader.GetDateTime(5) : null,
                                 Contrato = new Contrato
                                 {
                                     IdContrato = reader.GetInt32(4),
-                                    InquilinoId = reader.GetInt32(5),
+                                    InquilinoId = reader.GetInt32(6),
                                     InmuebleId = reader.GetInt32(7),
                                     FechaDesde = reader.GetDateTime(8),
                                     FechaHasta = reader.GetDateTime(9),
@@ -117,7 +119,7 @@ namespace InmobiliariaQuintana.Models
                                     TelefonoGarante = reader.GetString(12),
 
                                 },
-                                FechaUpdate = reader["fechaUpdate"] != DBNull.Value ? reader.GetDateTime(10) : null
+
 
 
                             };

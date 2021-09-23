@@ -1,0 +1,92 @@
+﻿@model IEnumerable<InmobiliariaQuintana.Models.Contrato>
+
+@{
+    ViewData["Title"] = "Contratos";
+}
+
+<h1>Contratos</h1>
+
+<p>
+    <a asp-action="Create">Crear nuevo contrato</a>
+</p>
+<table class="table table-warning">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdContrato)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InquilinoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InmuebleId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaDesde)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaHasta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreGarante)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DNIGarante)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TelefonoGarante)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdContrato)
+                </td>
+                <td>
+                    @(item.inqui.Nombre + " " + item.inqui.Apellido)
+                </td>
+                <td>
+                    @(item.InmuebleId + " - " + item.inmueble.Direccion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaDesde)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaHasta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreGarante)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DNIGarante)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TelefonoGarante)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Precio)
+                </td>
+                <td>
+
+
+
+                    <a class="btn btn-warning" asp-action="Edit" asp-controller="Contrato" asp-route-id="@item.IdContrato" title="Edit"><i class="fas fa-pencil-alt"></i> </a>
+                    <a class="btn btn-warning" asp-action="Details" asp-controller="Contrato" asp-route-id="@item.IdContrato" title="Details"><i class="far fa-list-alt"></i> </a>
+                    <a class="btn btn-warning" asp-action="Delete" asp-controller="Contrato" asp-route-id="@item.IdContrato" title="Delete"> <i class="fas fa-trash-alt"></i></a>
+
+
+                    <a class="btn btn-warning" asp-action="PagosPorContrato" asp-controller="Pago" asp-route-id="@item.IdContrato" title="Pagos"><i class="fas fa-money-bill-alt"></i> </a>
+
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

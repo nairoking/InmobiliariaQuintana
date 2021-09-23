@@ -19,6 +19,7 @@ namespace InmobiliariaQuintana.Models
         public int Superficie { get; set; }
         public decimal Latitud { get; set; }
         public decimal Longitud { get; set; }
+        [Display(Name = "Disponible")]
         public string Estado { get; set; }
 
         [Display(Name = "Dueño")]

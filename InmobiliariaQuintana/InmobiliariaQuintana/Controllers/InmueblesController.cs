@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace InmobiliariaQuintana.Controllers
 {
+    [Authorize]
     public class InmueblesController : Controller
     {
         protected readonly IConfiguration configuration;

@@ -154,3 +154,4 @@ C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\Inm
 C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Inmuebles\Disponibles.cshtml.g.cs
 C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Pago\PagosPorContrato.cshtml.g.cs
 C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Inmuebles\Contratos.cshtml.g.cs
+C:\Users\Miguelon\Documents\GitHub\InmobiliariaQuintana\InmobiliariaQuintana\InmobiliariaQuintana\obj\Debug\net5.0\Razor\Views\Contrato\Buscar.cshtml.g.cs

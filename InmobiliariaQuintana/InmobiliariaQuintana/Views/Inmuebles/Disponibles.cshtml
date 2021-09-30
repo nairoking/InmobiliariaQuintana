@@ -7,9 +7,9 @@
 <h1>Disponibles</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Crear Inmueble</a>
 </p>
-<a class="btn btn-warning" asp-action="Index" asp-controller="Inmuebles"  title="Edit">Ver Todos </a>
+<a class="btn btn-warning" asp-action="Index" asp-controller="Inmuebles"  title="Ver Todos">Ver Todos </a>
 
 <table class="table table-warning" id="Todos">
     <thead>
@@ -67,9 +67,9 @@
                 </td>
                 <td>
 
-                    <a class="btn btn-warning" asp-action="Edit" asp-controller="Inmuebles" asp-route-id="@item.IdInmueble" title="Edit"><i class="fas fa-pencil-alt"></i> </a>
-                    <a class="btn btn-warning" asp-action="Details" asp-controller="Inmuebles" asp-route-id="@item.IdInmueble" title="Details"><i class="far fa-list-alt"></i> </a>
-                    <a class="btn btn-warning" asp-action="Delete" asp-controller="Inmuebles" asp-route-id="@item.IdInmueble" title="Delete"> <i class="fas fa-trash-alt"></i></a>
+                    <a class="btn btn-warning" asp-action="Edit" asp-controller="Inmuebles" asp-route-id="@item.IdInmueble" title="Editar"><i class="fas fa-pencil-alt"></i> </a>
+                    <a class="btn btn-warning" asp-action="Details" asp-controller="Inmuebles" asp-route-id="@item.IdInmueble" title="Detalles"><i class="far fa-list-alt"></i> </a>
+                    <a class="btn btn-warning" asp-action="Delete" asp-controller="Inmuebles" asp-route-id="@item.IdInmueble" title="Eliminar"> <i class="fas fa-trash-alt"></i></a>
                 </td>
             </tr>
 

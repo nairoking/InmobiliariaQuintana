@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace InmobiliariaQuintana.Controllers
 {
+    [Authorize]
     public class ContratoController : Controller
     {
         protected readonly IConfiguration configuration;
@@ -33,6 +34,20 @@ namespace InmobiliariaQuintana.Controllers
             return View(lista);
         }
 
+        // GET: Propietario/Buscar/5
+        [Route("[controller]/Buscar", Name = "Buscar")]
+        public IActionResult Buscar(BusquedaInmuebles busInm)
+        {
+            try
+            {
+                var lista = repoInmueble.obtenerInmuebles(busInm.Desde, busInm.Hasta, busInm.Id);
+                return Json(new { lista });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Error = ex.Message });
+            }
+        }
         // GET: ContratoController/Details/5
         public ActionResult Details(int id)
         {

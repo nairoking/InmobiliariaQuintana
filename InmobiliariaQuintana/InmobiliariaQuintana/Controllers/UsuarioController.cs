@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace InmobiliariaQuintana.Controllers
 {
+    [Authorize]
     public class UsuarioController : Controller
     {
         protected readonly IConfiguration configuration;

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace InmobiliariaQuintana.Controllers
 {
+    [Authorize]
     public class PagoController : Controller
     {
         protected readonly IConfiguration configuration;
@@ -65,6 +66,7 @@ namespace InmobiliariaQuintana.Controllers
         // GET: PagoController/Create
         public ActionResult Create(int id)
         {
+            ViewBag.Contratos = repoContrato.ObtenerTodos();
             ViewBag.contrato = id;
 
             return View();

@@ -6,9 +6,9 @@
 
 }
 
-<h1>Index</h1>
+<h1>Pagos</h1>
 
-<a class="btn btn-warning" asp-action="Create" asp-controller="Pago"  title="Edit">Nuevo Pago</a>
+<a class="btn btn-warning" asp-action="Create" asp-controller="Pago"  title="Nuevo Pago">Nuevo Pago</a>
 
 
 
@@ -56,9 +56,9 @@
                 </td>
                 <td>
 
-                    <a class="btn btn-warning" asp-action="Edit" asp-controller="Pago" asp-route-id="@item.Id" title="Edit"><i class="fas fa-pencil-alt"></i> </a>
-                    <a class="btn btn-warning" asp-action="Details" asp-controller="Pago" asp-route-id="@item.Id" title="Details"><i class="far fa-list-alt"></i> </a>
-                    <a class="btn btn-warning" asp-action="Delete" asp-controller="Pago" asp-route-id="@item.Id" title="Delete"> <i class="fas fa-trash-alt"></i></a>
+                    <a class="btn btn-warning" asp-action="Edit" asp-controller="Pago" asp-route-id="@item.Id" title="Editar"><i class="fas fa-pencil-alt"></i> </a>
+                    <a class="btn btn-warning" asp-action="Details" asp-controller="Pago" asp-route-id="@item.Id" title="Detalles"><i class="far fa-list-alt"></i> </a>
+                    <a class="btn btn-warning" asp-action="Delete" asp-controller="Pago" asp-route-id="@item.Id" title="Eliminar"> <i class="fas fa-trash-alt"></i></a>
                 </td>
             </tr>
         }

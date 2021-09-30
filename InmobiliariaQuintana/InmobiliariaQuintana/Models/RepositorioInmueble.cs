@@ -41,8 +41,57 @@ namespace InmobiliariaQuintana.Models
 			}
 			return res;
 		}
+		public IList<Inmueble> obtenerInmuebles(string desde, string hasta, int id)
+        {
+			IList<Inmueble> lista = new List<Inmueble>();
+			using (SqlConnection con = new SqlConnection(connectionString))
+			{
+				string sql = @" SELECT i.IdInmueble,i.Direccion,i.Ambientes,i.Superficie,i.Latitud,i.Longitud,i.PropietarioId,P.nombre ,P.apellido,i.Estado 
+                From(SELECT * FROM Inmueble i left join 
+                (SELECT  InmuebleId FROM Contrato c WHERE ((c.fechaDesde between @desde  and @hasta) 
+                or (c.fechaHasta between @desde and @hasta)) and c.idInmueble != @id) x on (i.IdInmueble = x.InmuebleId)
+                where x.idInmueble is null and i.estado = 0) i  INNER JOIN Propietario P ON i.PropietarioId = P.idPropietario;";
+				using (SqlCommand com = new SqlCommand(sql, con))
+				{
+					com.CommandType = CommandType.Text;
+					com.Parameters.AddWithValue("@desde", desde);
+					com.Parameters.AddWithValue("@hasta", hasta);
+					com.Parameters.AddWithValue("@id", id);
+					con.Open();
+					var reader = com.ExecuteReader();
+					if (reader != null)
+                    {
+						while (reader.Read())
+						{
+							Inmueble entidad = new Inmueble
+							{
+								IdInmueble = reader.GetInt32(0),
+								Direccion = reader.GetString(1),
+								Ambientes = reader.GetInt32(2),
+								Superficie = reader.GetInt32(3),
+								Latitud = reader.GetDecimal(4),
+								Longitud = reader.GetDecimal(5),
+								PropietarioId = reader.GetInt32(6),
+								Estado = reader.GetString(7),
+								Duenio = new Propietario
+								{
+									IdPropietario = reader.GetInt32(6),
+									Nombre = reader.GetString(8),
+									Apellido = reader.GetString(9),
+								}
+							};
+							lista.Add(entidad);
+						}
+					}
+					con.Close();
+				}
+			}
+			return lista;
+		}
 
-		public IList<Inmueble> ObtenerTodos()
+
+	
+	public IList<Inmueble> ObtenerTodos()
 		{
 			IList<Inmueble> res = new List<Inmueble>();
 			using (SqlConnection connection = new SqlConnection(connectionString))

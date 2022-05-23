@@ -81,14 +81,10 @@ namespace InmobiliariaQuintana.Controllers
             {
                 ViewBag.contrato = pago.ContratoId;
                 int id = pago.Id;
-                
-             
-                
-                
                 repoPago.Alta(pago);
                 return RedirectToAction(nameof(Index), new { id});
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }

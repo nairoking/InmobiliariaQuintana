@@ -10,6 +10,7 @@ namespace InmobiliariaQuintana.Models
     public class Inmueble
     {
         [Display(Name = "Código")]
+        [Key]
         public int IdInmueble { get; set; }
       
         public string Direccion { get; set; }

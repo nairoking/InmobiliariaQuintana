@@ -87,7 +87,7 @@ namespace InmobiliariaQuintana.Controllers
                     return View(entidad);
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
 
                 return View();

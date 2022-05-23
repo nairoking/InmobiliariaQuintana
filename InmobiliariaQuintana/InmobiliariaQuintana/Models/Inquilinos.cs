@@ -8,6 +8,7 @@ namespace InmobiliariaQuintana.Models
 {
     public class Inquilinos
     {
+        [Key]
         public int IdInquilino { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }

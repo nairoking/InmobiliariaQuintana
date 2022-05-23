@@ -1,5 +1,6 @@
 ﻿using InmobiliariaQuintana.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -48,16 +49,30 @@ namespace InmobiliariaQuintana.Controllers
         // POST: PropietariosController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Propietario p)
+        public ActionResult Create(Propietario propietario)
         {
+
             try
             {
-                repositorio.Alta(p);
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)// Pregunta si el modelo es válido
+                {
+                    // Reemplazo de clave plana por clave con hash
+                    propietario.Clave = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                        password: propietario.Clave,
+                        salt: System.Text.Encoding.ASCII.GetBytes(configuration["Salt"]),
+                        prf: KeyDerivationPrf.HMACSHA1,
+                        iterationCount: 1000,
+                        numBytesRequested: 256 / 8));
+                    repositorio.Alta(propietario);
+                    TempData["Id"] = propietario.IdPropietario;
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                    return View(propietario);
             }
-            catch
-            {
-                return View();
+            catch (Exception ex)
+            {//poner breakpoints para detectar errores
+                throw;
             }
         }
 

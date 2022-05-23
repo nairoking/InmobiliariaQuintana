@@ -11,6 +11,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using InmobiliariaQuintana.Models;
 
 namespace InmobiliariaQuintana
 {
@@ -33,7 +37,41 @@ namespace InmobiliariaQuintana
                    options.LoginPath = "/Home/Index";
                    options.LogoutPath = "/Usuarios/Logout";
                    options.AccessDeniedPath = "/Home/Restringido";
-               });
+               })
+               .AddJwtBearer(options =>//la api web valida con token
+               {
+                   options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                   {
+                       ValidateIssuer = true,
+                       ValidateAudience = true,
+                       ValidateLifetime = true,
+                       ValidateIssuerSigningKey = true,
+                       ValidIssuer = Configuration["TokenAuthentication:Issuer"],
+                       ValidAudience = Configuration["TokenAuthentication:Audience"],
+                       IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.ASCII.GetBytes(
+                           Configuration["TokenAuthentication:SecretKey"])),
+                   };
+                   // opción extra para usar el token el hub
+                   options.Events = new JwtBearerEvents
+                   {
+                       OnMessageReceived = context =>
+                       {
+                           // Read the token out of the query string
+                           var accessToken = context.Request.Query["access_token"];
+                           // If the request is for our hub...
+                           var path = context.HttpContext.Request.Path;
+                           if (!string.IsNullOrEmpty(accessToken) &&
+                               path.StartsWithSegments("/chatsegurohub"))
+                           {//reemplazar la url por la usada en la ruta ?
+                               context.Token = accessToken;
+                           }
+                           return Task.CompletedTask;
+                       }
+                   };
+               })
+            
+
+               ;
 
             services.AddAuthorization(options =>
             {
@@ -42,6 +80,11 @@ namespace InmobiliariaQuintana
             });
             services.AddMvc();
             services.AddSignalR();
+            services.AddDbContext<DataContext>(
+                options => options.UseSqlServer(
+                    Configuration["ConnectionStrings:DefaultConnection"]
+                )
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

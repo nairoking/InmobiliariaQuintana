@@ -27,12 +27,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="ContratoId" class="control-label"></label>
-                <select class="form-control" name="InmuebleId">
+                <select class="form-control" name="ContratoId">
                     @foreach (var item in (IList<Contrato>)ViewBag.Contratos)
                     {
-                        <option value="@item.IdContrato">@(item.IdContrato + " - " + item.inmueble.Direccion)</option>
+                        @:<option @(item.IdContrato == idContrato ? "selected" : "" ) value="@item.IdContrato">@(item.IdContrato + " - " + item.inmueble.Direccion)</option>
                     }
                 </select>
+               
                 <span asp-validation-for="ContratoId" class="text-danger"></span>
             </div>
             <div class="form-group">

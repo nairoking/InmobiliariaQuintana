@@ -68,6 +68,22 @@ namespace InmobiliariaQuintana.Api
                 return BadRequest(ex);
             }
         }
+		[HttpGet("obtenerusuario")]
+		public async Task<ActionResult<Propietario>> ObtenerUsuario()
+		{
+			try
+			{
+
+				var email = HttpContext.User.FindFirst(ClaimTypes.Name).Value;
+
+				return await contexto.Propietarios.FirstOrDefaultAsync(x => x.Email == email);
+
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex.Message);
+			}
+		}
 
 		// GET api/<controller>/GetAll
 		[HttpGet("GetAll")]
@@ -151,33 +167,40 @@ namespace InmobiliariaQuintana.Api
 		}
 
 		// PUT api/<controller>/5
-		[HttpPut("{id}")]
-		public async Task<IActionResult> Put(int id, [FromForm] Propietario entidad)
+		[HttpPut("actualizar")]
+		public async Task<IActionResult> Put([FromBody] Propietario prop)
 		{
 			try
 			{
-				if (ModelState.IsValid)
+				var email = HttpContext.User.FindFirst(ClaimTypes.Name).Value;
+				Propietario original = await contexto.Propietarios.FirstOrDefaultAsync(x => x.Email == email);
+
+				if (prop.IdPropietario != original.IdPropietario)
 				{
-					entidad.IdPropietario = id;
-					Propietario original = await contexto.Propietarios.FindAsync(id);
-					if (String.IsNullOrEmpty(entidad.Clave))
-					{
-						entidad.Clave = original.Clave;
-					}
-					else
-					{
-						entidad.Clave = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-							password: entidad.Clave,
-							salt: System.Text.Encoding.ASCII.GetBytes(config["Salt"]),
-							prf: KeyDerivationPrf.HMACSHA1,
-							iterationCount: 1000,
-							numBytesRequested: 256 / 8));
-					}
-					contexto.Propietarios.Update(entidad);
-					await contexto.SaveChangesAsync();
-					return Ok(entidad);
+					return Unauthorized();
 				}
-				return BadRequest();
+
+
+				/*if (prop.Clave == null || prop.Clave == "")
+				{
+					prop.Clave = propietarioV.Clave;
+				}
+				else
+				{
+					string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+					   password: prop.Clave,
+					   salt: System.Text.Encoding.ASCII.GetBytes(config["Salt"]),
+					   prf: KeyDerivationPrf.HMACSHA1,
+					   iterationCount: 1000,
+					   numBytesRequested: 256 / 8));
+					prop.Clave = hashed;
+
+				}*/
+				contexto.Entry(original).CurrentValues.SetValues(prop);
+				//contexto.Propietarios.Update(prop);
+				await contexto.SaveChangesAsync();
+
+				return (IActionResult)await contexto.Propietarios.FirstOrDefaultAsync(x => x.Email == email);
 			}
 			catch (Exception ex)
 			{

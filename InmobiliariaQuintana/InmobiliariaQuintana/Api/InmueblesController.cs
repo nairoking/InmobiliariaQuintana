@@ -34,6 +34,7 @@ namespace InmobiliariaQuintana.Api
             this.contextAccessor = contextAccessor;
             this.environment = environment;
         }
+
         [HttpGet("obtener")]
         public async Task<ActionResult<List<Inmueble>>> Get()
         {

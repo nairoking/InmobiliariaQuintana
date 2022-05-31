@@ -43,7 +43,7 @@ namespace InmobiliariaQuintana.Models
 							TelefonoGarante = reader.GetString(7),
 							Precio = reader.GetDecimal(8),
 
-							inqui = new Inquilinos
+							inquilino = new Inquilinos
 							{
 								Nombre = reader.GetString(9),
 								Apellido = reader.GetString(10),
@@ -153,7 +153,7 @@ namespace InmobiliariaQuintana.Models
 							TelefonoGarante = reader.GetString(7),
 							Precio = reader.GetDecimal(8),
 
-							inqui = new Inquilinos
+							inquilino = new Inquilinos
 							{
 								Nombre = reader.GetString(9),
 								Apellido = reader.GetString(10),
@@ -224,7 +224,7 @@ namespace InmobiliariaQuintana.Models
 							TelefonoGarante = reader.GetString(7),
 							Precio = reader.GetDecimal(8),
 
-							inqui = new Inquilinos
+							inquilino = new Inquilinos
 							{
 								Nombre = reader.GetString(9),
 								Apellido = reader.GetString(10),

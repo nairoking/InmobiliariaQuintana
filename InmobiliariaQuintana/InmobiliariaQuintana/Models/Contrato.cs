@@ -30,7 +30,7 @@ namespace InmobiliariaQuintana.Models
         [Display(Name = "Telefono del Garante")]
         public string TelefonoGarante { get; set; }
         public Inmueble inmueble { get; set; }
-        public Inquilinos inqui { get; set; }
+        public Inquilinos inquilino { get; set; }
         public decimal Precio { get; set; }
     }
 }

@@ -63,6 +63,7 @@ namespace InmobiliariaQuintana.Api
 
 
         }
+
         [HttpGet("contrato")]
         public async Task<ActionResult<List<Inmueble>>> GetAlquilados()
         {
@@ -70,7 +71,7 @@ namespace InmobiliariaQuintana.Api
             try
             {
 
-                var email = HttpContext.User.FindFirst(ClaimTypes.Email).Value;
+                var email = HttpContext.User.FindFirst(ClaimTypes.Name).Value;
                 var propietario = await applicationDbContext.Propietarios.FirstOrDefaultAsync(x => x.Email == email);
                 var inmuebles = await applicationDbContext.Inmuebles.Join(
                     applicationDbContext.Contratos.Where(x => x.FechaHasta > DateTime.Now && x.FechaDesde < DateTime.Now),
@@ -89,14 +90,24 @@ namespace InmobiliariaQuintana.Api
 
             }
         }
+
         [HttpPut("{id}")]//Cambiar Estado
         public async Task<ActionResult<Inmueble>> Put([FromForm] byte estado, int id)
         {
+            var e = "no";
+            if(estado == 1)
+            {
+                e = "si";
+            }
+            else
+            {
+                e = "no";
+            }
 
             try
             {
 
-                var email = HttpContext.User.FindFirst(ClaimTypes.Email).Value;
+                var email = HttpContext.User.FindFirst(ClaimTypes.Name).Value;
                 var propietario = await applicationDbContext.Propietarios.FirstOrDefaultAsync(x => x.Email == email);
                 Inmueble inmuebleV = await applicationDbContext.Inmuebles.FirstOrDefaultAsync(x => x.IdInmueble == id && x.PropietarioId == propietario.IdPropietario);
                 if (inmuebleV == null)
@@ -104,7 +115,7 @@ namespace InmobiliariaQuintana.Api
                     return NotFound();
                 }
 
-                inmuebleV.Estado = estado + "";
+                inmuebleV.Estado = e;
                 applicationDbContext.Update(inmuebleV);
                 await applicationDbContext.SaveChangesAsync();
                 return inmuebleV;

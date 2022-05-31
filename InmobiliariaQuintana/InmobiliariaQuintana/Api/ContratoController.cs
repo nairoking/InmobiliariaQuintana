@@ -35,7 +35,7 @@ namespace InmobiliariaQuintana.Api
             {
                 if (ModelState.IsValid)
                 {
-                    return await applicationDbContext.Contratos.Include(x => x.inqui).Include(x => x.inmueble).Where(x =>
+                    return await applicationDbContext.Contratos.Include(x => x.inquilino).Include(x => x.inmueble).Where(x =>
                      x.InmuebleId == id &&
                      x.FechaHasta > DateTime.Now && x.FechaDesde < DateTime.Now)
                     .FirstOrDefaultAsync();

@@ -22,7 +22,7 @@ namespace InmobiliariaQuintana.Models
         public decimal Longitud { get; set; }
         [Display(Name = "Disponible")]
         public string Estado { get; set; }
-
+        public string Imagen { get; set; }
         [Display(Name = "Dueño")]
         public int PropietarioId { get; set; }
         [ForeignKey(nameof(PropietarioId))]
